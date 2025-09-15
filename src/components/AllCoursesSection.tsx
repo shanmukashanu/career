@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ExternalLink, Globe, Clock, Star, Award } from 'lucide-react';
+import { Globe, Clock } from 'lucide-react';
 import { courseService, Course } from '../services/courseService';
 import QueryForm from './queries/QueryForm';
 
@@ -26,6 +26,8 @@ const AllCoursesSection = () => {
     return () => { mounted = false; };
   }, []);
 
+  // Show duration exactly as entered by admin; no extra formatting
+
   return (
     <section className="py-20 bg-gray-50" id="all-courses">
       <div className="container mx-auto px-4">
@@ -49,66 +51,50 @@ const AllCoursesSection = () => {
           {courses.map((course, index) => (
             <div
               key={index}
-              className="group relative w-full h-56 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-fade-in bg-gray-900"
+              className="flex flex-col rounded-2xl bg-white overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >
-              {/* Background Image */}
-              <img
-                src={course.image || 'https://via.placeholder.com/800x450?text=Course'}
-                alt={course.title || 'Course'}
-                className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
-              />
-              {/* Lighter overlay for brighter look */}
-              <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.25)_0%,rgba(0,0,0,0.35)_60%,rgba(0,0,0,0.5)_100%)]"></div>
-
-              {/* Rating Badge */}
-              <div className="absolute top-4 right-4 z-10 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 flex items-center space-x-1">
-                <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                <span className="text-sm font-medium">{(((course as any).ratingsAverage || (course as any).rating) && (((course as any).ratingsAverage || (course as any).rating) > 0) ? ((course as any).ratingsAverage || (course as any).rating) : 4.8)}</span>
+              {/* Top image */}
+              <div className="h-44 w-full overflow-hidden">
+                <img
+                  src={course.image || 'https://via.placeholder.com/800x450?text=Course'}
+                  alt={course.title || 'Course'}
+                  className="w-full h-full object-cover"
+                />
               </div>
 
-              {/* Content */}
-              <div className="relative z-10 h-full flex flex-col justify-between px-5 py-5">
-                <h3
-                  className="text-2xl font-extrabold text-cyan-300 text-center"
-                  style={{ textShadow: '0 0 18px rgba(34,211,238,0.9), 0 0 8px rgba(34,211,238,0.6)' }}
-                >
+              {/* Content area */}
+              <div className="p-5">
+                <h3 className="text-xl font-extrabold text-blue-700 leading-snug">
                   {course.title || 'Untitled Course'}
                 </h3>
-
-                <div className="mt-4 flex items-center justify-center gap-4 text-gray-200/90 text-sm">
-                  <span className="inline-flex items-center gap-1"><Globe className="w-4 h-4" />{course.category || 'General'}</span>
-                  <span className="inline-flex items-center gap-1"><Clock className="w-4 h-4" />{typeof course.duration === 'number' ? `${course.duration} weeks` : 'Flexible'}</span>
-                  <span className="inline-flex items-center gap-1"><Award className="w-4 h-4" />{(course as any).level || 'All Levels'}</span>
-                </div>
-
-                {/* Action Buttons (above description) */}
-                <div className="mt-4 flex items-center justify-center gap-3">
-                  <a
-                    href={(course as any).pageLink || '#'}
-                    target={((course as any).pageLink ? '_blank' : undefined) as any}
-                    rel={((course as any).pageLink ? 'noopener noreferrer' : undefined) as any}
-                    className="px-4 py-2 text-sm font-semibold rounded-full bg-white/90 text-gray-900 hover:bg-white transition-colors flex items-center shadow-sm"
-                  >
-                    View More <ExternalLink className="w-4 h-4 ml-1.5" />
-                  </a>
-                  <button
-                    onClick={() => setActiveQueryCourse(course)}
-                    className="px-4 py-2 text-sm font-semibold rounded-full bg-green-400 text-white hover:bg-green-500 transition-colors shadow-sm"
-                  >
-                    Query
-                  </button>
-                </div>
-
-                {/* Short Description (no pricing) */}
-                <p className="mt-3 text-gray-100/90 text-sm text-center">
+                <p className="mt-2 text-gray-600 text-sm line-clamp-3">
                   {(
                     (course.shortDescription && course.shortDescription.length > 0)
                       ? course.shortDescription
                       : (course.description ? String(course.description) : '')
-                  ).slice(0, 140) || 'Learn with a practical, industry-focused curriculum designed to accelerate your growth.'}
-                  {((course.shortDescription || course.description || '').length > 140) ? '…' : ''}
+                  ) || ''}
                 </p>
+                <div className="mt-3 flex items-center gap-4 text-gray-600 text-sm">
+                  <span className="inline-flex items-center gap-1"><Clock className="w-4 h-4" />{(course as any).duration ?? ''}</span>
+                  <span className="inline-flex items-center gap-1"><Globe className="w-4 h-4" />{course.category || 'General'}</span>
+                </div>
+                <div className="mt-4 flex items-center gap-3">
+                  <a
+                    href={(course as any).pageLink || '#'}
+                    target={((course as any).pageLink ? '_blank' : undefined) as any}
+                    rel={((course as any).pageLink ? 'noopener noreferrer' : undefined) as any}
+                    className="flex-1 inline-flex items-center justify-center px-4 py-2.5 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors text-sm"
+                  >
+                    VIEW MORE
+                  </a>
+                  <button
+                    onClick={() => setActiveQueryCourse(course)}
+                    className="flex-1 inline-flex items-center justify-center px-4 py-2.5 rounded-full bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-colors text-sm"
+                  >
+                    ENQUIRE
+                  </button>
+                </div>
               </div>
             </div>
           ))}

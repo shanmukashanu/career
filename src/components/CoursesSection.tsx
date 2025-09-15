@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ExternalLink, Globe, Clock, Users, Star, Award } from 'lucide-react';
+import { Globe, Clock } from 'lucide-react';
 import { courseService, Course } from '../services/courseService';
 import QueryForm from './queries/QueryForm';
 
@@ -30,6 +30,8 @@ const CoursesSection = () => {
     };
   }, []);
 
+
+  // No extra formatting; show duration exactly as admin added
 
   return (
     <section className="py-20 bg-white relative overflow-hidden" id="courses">
@@ -71,60 +73,49 @@ const CoursesSection = () => {
         <div className="flex justify-center">
           <div
             ref={scrollRef}
-            className="flex space-x-6 overflow-x-auto scrollbar-hide pb-4 max-w-7xl"
+            className="flex space-x-6 overflow-x-auto scrollbar-hide pb-2 max-w-7xl"
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {courses.map((course, index) => (
-              <div
-                key={index}
-                className="group relative flex-none w-80 h-56 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 bg-gray-900"
-              >
-                {/* Background Image */}
-                <img
-                  src={(course as any).image || 'https://via.placeholder.com/800x450?text=Course'}
-                  alt={course.title}
-                  className="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700"
-                />
-                {/* Lighter gradient overlay for brighter look */}
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.25)_0%,rgba(0,0,0,0.35)_60%,rgba(0,0,0,0.5)_100%)]"></div>
-
-                {/* Rating Badge */}
-                <div className="absolute top-4 right-4 z-10 bg-white/90 backdrop-blur-sm rounded-lg px-2 py-1 flex items-center space-x-1">
-                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  <span className="text-sm font-medium">{((course as any).averageRating && (course as any).averageRating > 0 ? (course as any).averageRating : 4.8)}</span>
+              <div key={index} className="flex-none w-80 rounded-2xl bg-white shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden">
+                {/* Image top */}
+                <div className="h-44 w-full overflow-hidden">
+                  <img
+                    src={(course as any).image || 'https://via.placeholder.com/800x450?text=Course'}
+                    alt={course.title}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-
-                {/* Content over the image */}
-                <div className="relative z-10 h-full flex flex-col justify-center px-5">
-                  <h3
-                    className="text-2xl font-extrabold text-cyan-300 text-center drop-shadow"
-                    style={{ textShadow: '0 0 18px rgba(34,211,238,0.9), 0 0 8px rgba(34,211,238,0.6)' }}
-                  >
+                {/* Content */}
+                <div className="p-5">
+                  <h3 className="text-xl font-extrabold text-blue-700 leading-snug">
                     {course.title}
                   </h3>
-
-                  {/* Meta Row */}
-                  <div className="mt-6 flex items-center justify-center gap-4 text-gray-200/90 text-sm">
-                    <span className="inline-flex items-center gap-1"><Globe className="w-4 h-4" />{(course as any).languages || 'English'}</span>
-                    <span className="inline-flex items-center gap-1"><Clock className="w-4 h-4" />{(course as any).duration || 'Self-paced'}</span>
-                    <span className="inline-flex items-center gap-1"><Award className="w-4 h-4" />{(course as any).level || 'All Levels'}</span>
+                  <p className="mt-2 text-gray-600 text-sm line-clamp-3">
+                    {(
+                      (course as any).shortDescription && String((course as any).shortDescription).length > 0
+                        ? String((course as any).shortDescription)
+                        : (course as any).description ? String((course as any).description) : ''
+                    ) || ''}
+                  </p>
+                  <div className="mt-3 flex items-center gap-4 text-gray-600 text-sm">
+                    <span className="inline-flex items-center gap-1"><Clock className="w-4 h-4" />{(course as any).duration ?? ''}</span>
+                    <span className="inline-flex items-center gap-1"><Globe className="w-4 h-4" />{(course as any).category || 'General'}</span>
                   </div>
-
-                  {/* Bottom buttons separated */}
-                  <div className="absolute bottom-4 right-4 flex items-center gap-2">
+                  <div className="mt-4 flex items-center gap-3">
                     <a
                       href={(course as any).pageLink || '#'}
                       target={((course as any).pageLink ? '_blank' : undefined) as any}
                       rel={((course as any).pageLink ? 'noopener noreferrer' : undefined) as any}
-                      className="px-4 py-2 text-sm font-semibold rounded-full bg-white/90 text-gray-900 hover:bg-white transition-colors flex items-center shadow-sm"
+                      className="flex-1 inline-flex items-center justify-center px-4 py-2.5 rounded-full bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors text-sm"
                     >
-                      View More <ExternalLink className="w-4 h-4 ml-1.5" />
+                      VIEW MORE
                     </a>
                     <button
                       onClick={() => setActiveQueryCourse(course)}
-                      className="px-4 py-2 text-sm font-semibold rounded-full bg-green-400 text-white hover:bg-green-500 transition-colors shadow-sm"
+                      className="flex-1 inline-flex items-center justify-center px-4 py-2.5 rounded-full bg-emerald-500 text-white font-semibold hover:bg-emerald-600 transition-colors text-sm"
                     >
-                      Query
+                      ENQUIRE
                     </button>
                   </div>
                 </div>
