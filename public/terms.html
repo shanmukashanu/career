@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terms of Service | Career Redefine</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; background: #f9f9f9; }
+    header { background: #28a745; color: white; padding: 15px; text-align: center; }
+    main { max-width: 900px; margin: 20px auto; background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+    h1, h2 { color: #28a745; }
+    a { color: #28a745; }
+    footer { text-align: center; padding: 15px; background: #28a745; color: white; margin-top: 20px; }
+    #topBtn { position: fixed; bottom: 20px; right: 20px; padding: 10px 15px; background: #28a745; color: #fff; border: none; border-radius: 50%; cursor: pointer; display: none; }
+  </style>
+</head>
+<body>
+  <header><h1>Career Redefine</h1></header>
+  <main>
+    <h2>Terms of Service</h2>
+    <p>By accessing and using Career Redefine, you agree to the following terms:</p>
+    <h3>1. User Responsibilities</h3>
+    <p>Users must provide accurate information and use our services lawfully.</p>
+    <h3>2. Account Security</h3>
+    <p>You are responsible for maintaining confidentiality of your account.</p>
+    <h3>3. Prohibited Activities</h3>
+    <p>You agree not to misuse our platform for illegal or unauthorized activities.</p>
+    <h3>4. Limitation of Liability</h3>
+    <p>Career Redefine is not responsible for damages arising from misuse of services.</p>
+    <h3>5. Changes to Terms</h3>
+    <p>We may update these terms from time to time. Continued use indicates acceptance.</p>
+  </main>
+  <footer>&copy; 2025 Career Redefine. All Rights Reserved.</footer>
+  <button id="topBtn" onclick="scrollToTop()">⬆</button>
+  <script>
+    const btn = document.getElementById("topBtn");
+    window.onscroll = () => { btn.style.display = window.scrollY > 200 ? "block" : "none"; };
+    function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+  </script>
+</body>
+</html>
