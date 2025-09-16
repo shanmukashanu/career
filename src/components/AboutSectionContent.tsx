@@ -29,36 +29,7 @@ const AboutSectionContent: React.FC = () => {
         </div>
       </div>
 
-      {/* Mentor Section 
-      <div className="relative py-16 sm:py-24 bg-gradient-to-b from-white to-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-            <div className="order-2 lg:order-1">
-              <div className="inline-flex items-center gap-2 mb-3">
-                <span className="text-sm tracking-wider text-emerald-600 font-semibold">My Mission With Career Redefine</span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-gray-900 mb-4">A Mentor’s Promise to You</h2>
-              <p className="text-gray-700 leading-relaxed">
-                I’ve seen careers transform when professionals stop chasing tools and start mastering real analytics, AI workflows, and product thinking. My mission with this course is simple: to help you unlock that transformation and lead in the AI-driven future without burning lakhs on overpriced programs. Learning should be premium, but it should never be expensive.
-              </p>
-              <div className="mt-6 p-4 rounded-xl bg-white/70 backdrop-blur border border-gray-200 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.2)] transform-gpu hover:shadow-[0_20px_50px_-20px_rgba(0,0,0,0.25)] hover:-translate-y-0.5 transition-all">
-                <p className="text-lg font-semibold text-gray-900">Shivam Yadav</p>
-                <p className="text-sm text-gray-600">AI-ML Instructor–Mentor | ex-DataScience Instructor @Scaler | IIT Kanpur</p>
-              </div>
-            </div>
-            <div className="order-1 lg:order-2">
-              <div className="relative group perspective-[1000px]">
-                <div className="relative p-2 rounded-2xl bg-gradient-to-br from-gray-100 to-white border border-gray-200 shadow-xl transform-gpu transition-transform duration-300 group-hover:rotate-x-1 group-hover:-rotate-y-1">
-                  <img src="/mentor.png" alt="Mentor" className="w-full h-auto rounded-xl object-cover" />
-          
-                  <div className="absolute -top-4 -right-4 bg-white/80 backdrop-blur px-3 py-1 rounded-full shadow text-xs text-gray-700 border border-gray-200">Mentor</div>
-                  <div className="absolute -bottom-4 -left-4 bg-white/80 backdrop-blur px-3 py-1 rounded-full shadow text-xs text-gray-700 border border-gray-200">AI • Analytics • Product</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>*/}
+      
 
       {/* Our Values Section */}
       <div className="py-16 sm:py-24 bg-gray-50">

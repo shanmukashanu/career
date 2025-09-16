@@ -214,34 +214,76 @@ const sessionConfig = {
 };
 
 // CORS configuration
-const allowedOrigins = new Set([
-  'http://localhost:5173',
-  'http://127.0.0.1:5173',
-  // Deployed frontend origin (NOT the API origin)
-  'https://career-6g0u.onrender.com'
-]);
+const allowedOrigins = [
+  // Local development
+  /^https?:\/\/localhost(:\d+)?$/,
+  /^https?:\/\/127\.0\.0\.1(:\d+)?$/,
+  
+  // Production domains
+  /^https?:\/\/([a-z0-9-]+\.)*career-redefine\.com$/, 
+  /^https?:\/\/([a-z0-9-]+\.)*career-redefine\.vercel\.app$/,
+  /^https?:\/\/([a-z0-9-]+\.)*career-redefine\.onrender\.com$/,
+  
+  // Specific production URLs
+  'https://career-6g0u.onrender.com',
+  'https://career-redefine.vercel.app',
+  'https://career-redefine.com'
+];
+
+// Add FRONTEND_URL if provided
 if (process.env.FRONTEND_URL) {
-  allowedOrigins.add(process.env.FRONTEND_URL);
-}
-if (process.env.FRONTEND_URL_PROD) {
-  allowedOrigins.add(process.env.FRONTEND_URL_PROD);
+  if (Array.isArray(process.env.FRONTEND_URL)) {
+    allowedOrigins.push(...process.env.FRONTEND_URL);
+  } else {
+    allowedOrigins.push(process.env.FRONTEND_URL);
+  }
 }
 
 const corsOptions = {
-  origin: (origin, callback) => {
-    // Allow non-browser or same-origin requests (e.g., curl, server-to-server)
+  origin(origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
     if (!origin) return callback(null, true);
-    if (allowedOrigins.has(origin)) return callback(null, true);
-    return callback(new Error(`Not allowed by CORS: ${origin}`));
+    
+    // Check if origin matches any allowed pattern
+    const isAllowed = allowedOrigins.some(pattern => {
+      if (typeof pattern === 'string') {
+        return pattern === origin;
+      }
+      // Handle regex patterns
+      return pattern.test(origin);
+    });
+    
+    if (process.env.NODE_ENV === 'development' || isAllowed) {
+      callback(null, true);
+    } else {
+      console.warn(`CORS blocked request from origin: ${origin}`);
+      callback(new Error('Not allowed by CORS'));
+    }
   },
-  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS', 'HEAD'],
+  allowedHeaders: [
+    'Content-Type', 
+    'Authorization', 
+    'X-Requested-With', 
+    'Accept',
+    'X-Access-Token',
+    'X-Refresh-Token'
+  ],
   credentials: true,
-  exposedHeaders: ['set-cookie']
+  exposedHeaders: [
+    'set-cookie', 
+    'Authorization',
+    'X-Access-Token',
+    'X-Refresh-Token'
+  ],
+  maxAge: 86400, // 24 hours
+  preflightContinue: false,
+  optionsSuccessStatus: 204
 };
 
+// Apply CORS with options
 app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // ✅ handle preflight
+app.options('*', cors(corsOptions)); // Enable pre-flight for all routes
 
 // Session middleware must come before routes but after CORS
 app.use(session(sessionConfig));
