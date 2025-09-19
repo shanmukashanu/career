@@ -77,7 +77,7 @@ const CoursesSection = () => {
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
             {courses.map((course, index) => (
-              <div key={index} className="flex-none w-80 rounded-2xl bg-white shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden">
+              <div key={index} className="flex-none w-80 rounded-2xl bg-white shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col">
                 {/* Image top */}
                 <div className="h-44 w-full overflow-hidden">
                   <img
@@ -87,7 +87,7 @@ const CoursesSection = () => {
                   />
                 </div>
                 {/* Content */}
-                <div className="p-5">
+                <div className="p-5 flex flex-col flex-1">
                   <h3 className="text-xl font-extrabold text-blue-700 leading-snug">
                     {course.title}
                   </h3>
@@ -102,7 +102,7 @@ const CoursesSection = () => {
                     <span className="inline-flex items-center gap-1"><Clock className="w-4 h-4" />{(course as any).duration ?? ''}</span>
                     <span className="inline-flex items-center gap-1"><Globe className="w-4 h-4" />{(course as any).category || 'General'}</span>
                   </div>
-                  <div className="mt-4 flex items-center gap-3">
+                  <div className="mt-auto pt-4 flex items-center gap-3">
                     <a
                       href={(course as any).pageLink || '#'}
                       target={((course as any).pageLink ? '_blank' : undefined) as any}

@@ -51,7 +51,7 @@ const AllCoursesSection = () => {
           {courses.map((course, index) => (
             <div
               key={index}
-              className="flex flex-col rounded-2xl bg-white overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 animate-fade-in"
+              className="flex flex-col h-full rounded-2xl bg-white overflow-hidden shadow-md hover:shadow-lg transition-all duration-300 animate-fade-in"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               {/* Top image */}
@@ -64,7 +64,7 @@ const AllCoursesSection = () => {
               </div>
 
               {/* Content area */}
-              <div className="p-5">
+              <div className="p-5 flex flex-col flex-1">
                 <h3 className="text-xl font-extrabold text-blue-700 leading-snug">
                   {course.title || 'Untitled Course'}
                 </h3>
@@ -79,7 +79,7 @@ const AllCoursesSection = () => {
                   <span className="inline-flex items-center gap-1"><Clock className="w-4 h-4" />{(course as any).duration ?? ''}</span>
                   <span className="inline-flex items-center gap-1"><Globe className="w-4 h-4" />{course.category || 'General'}</span>
                 </div>
-                <div className="mt-4 flex items-center gap-3">
+                <div className="mt-auto pt-4 flex items-center gap-3">
                   <a
                     href={(course as any).pageLink || '#'}
                     target={((course as any).pageLink ? '_blank' : undefined) as any}

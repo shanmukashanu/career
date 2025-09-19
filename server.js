@@ -997,15 +997,15 @@ app.get('*', (req, res) => {
   res.status(404).json({ message: 'Not Found' });
 });
 
-// Start server
-let httpServer; // hold server instance for signal handlers
+// Start the server
+let serverInstance;
 const startServer = async () => {
   try {
     // Connect to MongoDB first
     await connectDB();
     
-    // Start the server
-    httpServer = app.listen(PORT, () => {
+    // Start the server and store the instance
+    serverInstance = app.listen(PORT, () => {
       console.log(`✅ Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
       if (process.env.NODE_ENV !== 'production' && process.env.EMBED_VITE === 'true') {
         console.log(`🔧 Vite dev server running at http://localhost:5173`);
@@ -1013,12 +1013,13 @@ const startServer = async () => {
     });
 
     // Initialize Socket.IO for realtime group chat
-    const io = new SocketIOServer(httpServer, {
+    const io = new SocketIOServer(serverInstance, {
       cors: {
         origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
         credentials: true,
       },
     });
+    
     // Provide IO to message controller for broadcasting
     if (groupMessageController?.setIO) groupMessageController.setIO(io);
 
@@ -1039,8 +1040,8 @@ const startServer = async () => {
     process.on('unhandledRejection', (err) => {
       console.log('UNHANDLED REJECTION! 💥 Shutting down...');
       console.log(err.name, err.message);
-      if (httpServer) {
-        httpServer.close(() => {
+      if (serverInstance) {
+        serverInstance.close(() => {
           process.exit(1);
         });
       } else {
@@ -1051,12 +1052,14 @@ const startServer = async () => {
     // Handle SIGTERM for graceful shutdown
     process.on('SIGTERM', () => {
       console.log('👋 SIGTERM RECEIVED. Shutting down gracefully');
-      if (httpServer) {
-        httpServer.close(() => {
+      if (serverInstance) {
+        serverInstance.close(() => {
           console.log('💥 Process terminated!');
         });
       }
     });
+    
+    return serverInstance;
   } catch (error) {
     console.error('❌ Failed to start server:', error);
     process.exit(1);
@@ -1113,16 +1116,33 @@ async function startViteDevServer() {
   }
 }
 
-// Start the server
-startServer();
+// Export the app and startServer function
+export { app, startServer };
+
+// Only start the server if this file is run directly (ESM-safe)
+const isDirectRun = (
+  process.env.NODE_ENV !== 'test' &&
+  process.argv[1] &&
+  fileURLToPath(import.meta.url) === path.resolve(process.argv[1])
+);
+if (isDirectRun) {
+  startServer().catch(err => {
+    console.error('Failed to start server:', err);
+    process.exit(1);
+  });
+}
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (err) => {
   console.log('UNHANDLED REJECTION! 💥 Shutting down...');
   console.log(err.name, err.message);
-  server.close(() => {
+  if (serverInstance) {
+    serverInstance.close(() => {
+      process.exit(1);
+    });
+  } else {
     process.exit(1);
-  });
+  }
 });
 
 // Start Vite dev server in development
@@ -1149,9 +1169,11 @@ if (process.env.NODE_ENV !== 'production' && process.env.EMBED_VITE === 'true') 
 // Handle SIGTERM
 process.on('SIGTERM', () => {
   console.log('👋 SIGTERM RECEIVED. Shutting down gracefully');
-  server.close(() => {
-    console.log('💥 Process terminated!');
-  });
+  if (serverInstance) {
+    serverInstance.close(() => {
+      console.log('💥 Process terminated!');
+    });
+  }
 });
 
 export default app;
