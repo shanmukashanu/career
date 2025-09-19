@@ -1,174 +1,141 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Career Redefine – Reinventing Careers</title>
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <style>
-    body {
-      font-family: "Georgia", serif;
-      line-height: 1.9;
-      background-color: #f9f9fb;
-      color: #222;
-    }
-    header {
-      background: url('https://images.unsplash.com/photo-1531545514256-b1400bc00f31') center/cover no-repeat;
-      color: white;
-      padding: 7rem 2rem;
-      text-align: center;
-    }
-    header h1 {
-      font-size: 3rem;
-      font-weight: bold;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
-    }
-    header p {
-      font-size: 1.2rem;
-      margin-top: 1rem;
-      text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
-    }
-    article {
-      max-width: 900px;
-      margin: auto;
-      padding: 3rem 1.5rem;
-      background: white;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.05);
-    }
-    article h2 {
-      margin-top: 2.5rem;
-      font-weight: bold;
-      font-size: 1.8rem;
-      color: #2c3e50;
-    }
-    article p {
-      margin-top: 1rem;
-      text-align: justify;
-    }
-    .article-image {
-      margin: 2rem 0;
-      text-align: center;
-    }
-    .article-image img {
-      max-width: 100%;
-      border-radius: 10px;
-      box-shadow: 0 6px 14px rgba(0,0,0,0.1);
-    }
-    blockquote {
-      background: #f1f5ff;
-      border-left: 5px solid #007bff;
-      padding: 1rem 1.2rem;
-      margin: 2rem 0;
-      font-style: italic;
-      color: #333;
-    }
-    footer {
-      background: #222;
-      color: #bbb;
-      padding: 2rem;
-      text-align: center;
-      margin-top: 3rem;
-    }
-    footer button {
-      margin-top: 1rem;
-    }
-    .btn-main {
-      background: #007bff;
-      color: white;
-      border-radius: 25px;
-      padding: 0.6rem 1.5rem;
-      transition: 0.3s;
-    }
-    .btn-main:hover {
-      background: #0056b3;
-      color: white;
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Career Reinvention Is No Longer Optional — Career Redefine</title>
+
+<!-- Bootstrap CSS (CDN) -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+  :root{
+    --accent:#b77f7f;
+    --paper:#f6ebe7;
+    --text:#222;
+    --muted:#6b6b6b;
+    --line:#d8c8c6;
+  }
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--text);
+    font-family: "Georgia", "Times New Roman", serif;
+    line-height:1.75;
+  }
+  .mag-wrap{
+    max-width:920px;
+    margin:48px auto;
+    background:#fff;
+    box-shadow:0 12px 30px rgba(0,0,0,0.08);
+    border-radius:8px;
+    overflow:hidden;
+    border-top:10px solid var(--accent);
+  }
+  .mag-top{
+    padding:10px 28px;
+    color:var(--muted);
+    font-size:13px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    border-bottom:1px solid var(--line);
+  }
+  .mag-hero{padding:34px 34px 18px;}
+  .mag-title{font-size:48px;line-height:1.1;margin:0 0 10px;font-weight:700;color:#1f1f1f;}
+  .mag-lead{font-size:18px;color:#4a4a4a;margin-bottom:20px;max-width:760px;}
+  .mag-body{display:flex;gap:28px;padding:10px 34px 34px;}
+  .col-left{width:290px;flex:0 0 290px;}
+  .feat-img{width:100%;border-radius:6px;box-shadow:0 6px 18px rgba(0,0,0,0.08);margin-bottom:18px;}
+  .byline{font-size:13px;color:var(--muted);margin-bottom:14px;}
+  .col-right{flex:1 1 auto;min-width:0;}
+  .article{column-count:2;column-gap:36px;font-size:17px;color:#222;}
+  .article h3{column-span:all;font-size:20px;color:#2a2a2a;border-left:4px solid var(--accent);padding-left:12px;margin:0.8rem 0;}
+  .article p{margin:0 0 1rem;text-align:justify;}
+  .mag-quote{column-span:all;border-left:4px solid #c66;margin:18px 0;padding:12px 16px;background:#fff6f5;font-style:italic;}
+  .article p:first-of-type::first-letter{float:left;font-size:56px;line-height:44px;margin-right:12px;font-weight:700;color:var(--accent);}
+  .rule{height:1px;background:var(--line);margin:22px 0;column-span:all;}
+  .mag-footer{padding:18px 34px 28px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);}
+  @media(max-width:980px){.mag-body{flex-direction:column}.col-left{width:100%}.article{column-count:1}}
+</style>
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <h1>Career Reinvention: Defining Your Future</h1>
-    <p>Adapt. Grow. Redefine your career in the modern workplace.</p>
-  </header>
+<div class="mag-wrap">
 
-  <!-- Article Content -->
-  <article>
-    <h2>Introduction</h2>
-    <p>
-      The modern workplace is undergoing a massive transformation. Automation, artificial intelligence, and global
-      competition have disrupted traditional roles, forcing professionals to rethink their career paths.
-      What worked yesterday may not guarantee success tomorrow. This reality makes career reinvention
-      not just desirable, but essential.
-    </p>
-    <div class="article-image">
-      <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" alt="Career planning discussion">
+  <div class="mag-top">A guide for professionals • In-depth</div>
+
+  <div class="mag-hero">
+    <h1 class="mag-title">Career Reinvention Is No Longer Optional</h1>
+    <p class="mag-lead">Why modern professionals must adapt, reskill, and manufacture their next chapters — and how to do it intentionally.</p>
+  </div>
+
+  <div class="mag-body">
+    <!-- Left Column -->
+    <aside class="col-left">
+      <!-- Real Unsplash image -->
+      <img class="feat-img" src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=600&q=60" alt="Professional growth">
+      
+      <div class="byline"><strong>By Career Redefine</strong> • Published Mar 13, 2025 • 8 min read</div>
+
+      <div class="meta-tags mb-3" style="font-size:13px;color:var(--muted);display:flex;flex-wrap:wrap;gap:6px;">
+        <span class="tag" style="border:1px solid var(--line);padding:4px 6px;border-radius:4px;">Career</span>
+        <span class="tag" style="border:1px solid var(--line);padding:4px 6px;border-radius:4px;">Reinvention</span>
+        <span class="tag" style="border:1px solid var(--line);padding:4px 6px;border-radius:4px;">Upskilling</span>
+      </div>
+
+      <!-- Extra content to fill space -->
+      <p style="font-size:15px;line-height:1.6;text-align:justify;">
+        Reinvention is not just an abstract idea — it’s already visible in workplaces everywhere. From traditional sectors like manufacturing to emerging fields like data science, adaptability is proving to be the strongest predictor of career longevity.
+      </p>
+      <p style="font-size:15px;line-height:1.6;text-align:justify;">
+        Side projects, freelance work, and peer learning have become stepping-stones for professionals seeking growth. Even small experiments — like publishing an article or volunteering on a digital project — can open doors to entirely new opportunities.
+      </p>
+      <p style="font-size:15px;line-height:1.6;text-align:justify;">
+        The left column serves as a space not just for images, but for insights, short tips, and data points that reinforce the main story. This ensures a balanced, visually appealing magazine layout without wasted space.
+      </p>
+    </aside>
+
+    <!-- Right Column -->
+    <main class="col-right">
+      <div class="article">
+        <p>
+          The modern workplace is undergoing a massive transformation. Automation, artificial intelligence, and global competition have disrupted traditional roles, forcing professionals to rethink their career paths. What worked yesterday may not guarantee success tomorrow — and that makes reinvention not only desirable but essential.
+        </p>
+
+        <h3>Why Reinvention Matters</h3>
+        <p><b>Shorter skill cycles:</b> The shelf-life of many skills has shrunk. Continuous learning is no longer optional — it’s a core professional practice.</p>
+        <p><b>Blurring industry lines:</b> Teachers become designers, engineers shift to leadership, and accountants join analytics teams. Reinvention creates lateral movement.</p>
+        <p><b>Adaptability over credentials:</b> Employers now prize demonstrable adaptability more than static degrees or titles.</p>
+
+        <div class="mag-quote">"Adaptability is the most enduring competitive advantage — more valuable than any single degree or certification."</div>
+
+        <h3>How Career Redefine Supports Reinvention</h3>
+        <p><b>Upskilling Programs:</b> Outcome-oriented learning tracks emphasize project-based portfolios.</p>
+        <p><b>Career Tools:</b> Resume rewrites, LinkedIn optimization, and interview practice translate learning into real opportunities.</p>
+        <p><b>Mindset Training:</b> Coaching and feedback help unlearn limiting beliefs and build leadership confidence.</p>
+
+        <h3>Conclusion</h3>
+        <p>
+          Career reinvention is not about erasing your past; it’s about recombining strengths with new capabilities. In a world of rapid change, the ability to adapt deliberately is no longer optional — it’s a requirement.
+        </p>
+
+        <div class="rule"></div>
+        <p style="column-span:all;font-size:14px;color:var(--muted);">© 2025 Career Redefine — Helping professionals break myths and define new paths.</p>
+      </div>
+    </main>
+  </div>
+
+  <div class="mag-footer">
+    <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+      <div>Designed for curious professionals • <span style="color:var(--muted)">All Rights Reserved</span></div>
+      
+        <a href="#" style="margin-left:8px;color:var(--accent);text-decoration:none;">CareerRedefine</a>  
+    
+     
     </div>
+  </div>
 
-    <h2>Why Reinvention Matters</h2>
-    <p>
-      Professional skills today have a shorter shelf-life than ever before. Research suggests the average half-life 
-      of a skill is less than five years. This means that knowledge and expertise need constant upgrading. 
-      No longer can professionals rely on one degree or a single expertise to carry them through decades of work.
-    </p>
-    <p>
-      Another important shift is the blurring of industries. Finance experts are learning data science, engineers 
-      are transitioning into product management, and writers are becoming content strategists. The borders 
-      that once defined professions are dissolving, making adaptability a key career strength.
-    </p>
-    <blockquote>
-      "Adaptability is no longer optional — it is the single most important skill for long-term success."
-    </blockquote>
-
-    <h2>Breaking the Myths</h2>
-    <p>
-      Despite these changes, many professionals still hold onto outdated beliefs:
-    </p>
-    <ul>
-      <li><b>“It’s too late to change careers.”</b> In truth, successful transitions happen at every age and stage.</li>
-      <li><b>“Only technical skills matter.”</b> Soft skills such as communication, collaboration, and problem-solving are equally valued.</li>
-      <li><b>“Career breaks ruin opportunities.”</b> When framed strategically, breaks can showcase resilience and growth.</li>
-    </ul>
-
-    <h2>How Career Redefine Helps</h2>
-    <p>
-      At Career Redefine, we’ve built programs and ecosystems to tackle these challenges. Our upskilling modules 
-      target high-demand fields like AI, Product, and Leadership. Beyond courses, we focus on mindset training 
-      that builds confidence and resilience. Mentorship plays a critical role, offering guidance from industry 
-      experts who’ve made transitions themselves. And the community ensures you are never alone in this journey.
-    </p>
-
-    <h2>Real-World Impact</h2>
-    <p>
-      The results speak for themselves. Learners report stronger resumes, faster interview calls, and greater 
-      confidence in switching industries. Structured pathways bring clarity after years of career stagnation.
-    </p>
-    <div class="article-image">
-      <img src="https://images.unsplash.com/photo-1522204523234-872e0c21b6d9" alt="Career success celebration">
-    </div>
-    <p>
-      From mid-level professionals breaking into leadership roles, to career returnees rejoining the workforce 
-      with new confidence, the power of reinvention has transformed thousands of journeys.
-    </p>
-
-    <h2>Conclusion</h2>
-    <p>
-      Career reinvention is not about starting over; it is about moving forward with new strength. With the right 
-      guidance, mindset, and ecosystem, professionals can redefine their paths and create opportunities in the 
-      evolving job market.
-    </p>
-    <div class="text-center">
-      <button class="btn btn-main mt-3" onclick="alert('Thank you for reading! 🚀 Keep growing!')">Like This Article</button>
-    </div>
-  </article>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Career Redefine. All Rights Reserved.</p>
-    <button class="btn btn-sm btn-outline-light" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to Top</button>
-  </footer>
+</div>
 
 </body>
 </html>
